@@ -1,0 +1,226 @@
+/* Base */
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #0d0f12;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .card {
+    background: #1b1e24;
+    padding: 25px;
+    border-radius: 20px;
+    width: 380px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeIn 0.6s ease;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #e53935;
+    opacity: 0.4;
+    transition: 0.3s;
+  }
+  .icon-btn:enabled {
+    opacity: 1;
+  }
+  .icon-btn:hover:enabled {
+    color: #ff4444;
+  }
+  
+  .mail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .mail-list li {
+    background: #23272f;
+    padding: 14px 16px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+  }
+  .mail-list li:hover {
+    background: #2c313a;
+  }
+  
+  .item-text {
+    max-width: 80%;
+  }
+  .item-text strong {
+    font-size: 14px;
+    display: block;
+  }
+  .item-text p {
+    font-size: 12px;
+    color: #aaa;
+    margin: 4px 0 0;
+    line-height: 1.4;
+  }
+  
+  .mail-list input[type="checkbox"] {
+    transform: scale(1.2);
+    accent-color: #1e88e5;
+    cursor: pointer;
+  }
+  
+  .footer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #newItem {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: #2c313a;
+    color: #fff;
+    outline: none;
+  }
+  #newItem::placeholder {
+    color: #aaa;
+  }
+  
+  .add-btn {
+    background: #1e88e5;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .add-btn:hover {
+    background: #1565c0;
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(229, 57, 53, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 1000;
+  }
+  
+  .overlay.active {
+    transform: scale(1);
+  }
+  
+  .overlay-content {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+    max-width: 400px;
+    padding: 20px;
+  }
+  
+  .overlay.active .overlay-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .overlay-content h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .overlay-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .confirm-delete-btn {
+    background: #fff;
+    color: #c62828;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .confirm-delete-btn:hover {
+    background: #f5f5f5;
+  }
+  
+  .cancel-btn {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 26px;   /* fits nicely */
+  }
