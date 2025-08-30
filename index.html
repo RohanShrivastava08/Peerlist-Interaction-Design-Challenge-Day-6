@@ -13,9 +13,12 @@
       <div class="header">
         <img src="https://dqy38fnwh4fqs.cloudfront.net/website/peerlist-logo-full-dark.svg" 
              alt="Peerlist Logo" class="logo">
-        <button class="icon-btn" id="deleteBtn" disabled>
-          🗑
-        </button>
+
+        <div class="header-actions">
+          <span id="selectedCount">0 Selected</span>
+          <button id="toggleSelect" class="select-btn">Select All</button>
+          <button class="icon-btn" id="deleteBtn" disabled>🗑</button>
+        </div>
       </div>
 
       <!-- Inbox List -->
@@ -41,25 +44,12 @@
           </div>
           <input type="checkbox" class="checkbox">
         </li>
-        <li>
-          <div class="item-text">
-            <strong>Security alert: New login</strong>
-            <p>We detected a new sign-in to your account from a new device...</p>
-          </div>
-          <input type="checkbox" class="checkbox">
-        </li>
-        <li>
-          <div class="item-text">
-            <strong>Upcoming maintenance notice</strong>
-            <p>Our platform will undergo scheduled maintenance this weekend...</p>
-          </div>
-          <input type="checkbox" class="checkbox">
-        </li>
       </ul>
 
       <!-- Footer Add Item -->
       <div class="footer">
-        <input type="text" id="newItem" placeholder="Add new item..." />
+        <input type="text" id="newHeader" placeholder="Enter title..." />
+        <input type="text" id="newSubtext" placeholder="Enter preview text..." />
         <button class="add-btn" id="addBtn">+ Add</button>
       </div>
     </div>

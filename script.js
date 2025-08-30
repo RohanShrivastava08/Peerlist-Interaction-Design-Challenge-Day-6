@@ -1,17 +1,55 @@
 const mailList = document.getElementById("mailList");
 const deleteBtn = document.getElementById("deleteBtn");
 const addBtn = document.getElementById("addBtn");
-const newItemInput = document.getElementById("newItem");
+const newHeaderInput = document.getElementById("newHeader");
+const newSubtextInput = document.getElementById("newSubtext");
 
 const overlay = document.getElementById("overlay");
 const overlayCount = document.getElementById("overlayCount");
 const confirmDelete = document.getElementById("confirmDelete");
 const cancelDelete = document.getElementById("cancelDelete");
+const selectedCountEl = document.getElementById("selectedCount");
+const toggleSelectBtn = document.getElementById("toggleSelect");
 
-// Enable/disable delete button based on selection
-mailList.addEventListener("change", () => {
+function updateSelectionUI() {
+  const checkboxes = mailList.querySelectorAll(".checkbox");
   const checked = mailList.querySelectorAll(".checkbox:checked").length;
+
+  selectedCountEl.textContent = `${checked} Selected`;
   deleteBtn.disabled = checked === 0;
+  toggleSelectBtn.textContent = checked === checkboxes.length && checkboxes.length > 0 
+    ? "Unselect All" 
+    : "Select All";
+
+  addBtn.disabled = checked > 0;
+  newHeaderInput.disabled = checked > 0;
+  newSubtextInput.disabled = checked > 0;
+}
+
+// Toggle selection when clicking list item
+mailList.addEventListener("click", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+
+  const checkbox = li.querySelector(".checkbox");
+  if (e.target !== checkbox) {
+    checkbox.checked = !checkbox.checked;
+  }
+  li.classList.toggle("selected", checkbox.checked);
+  updateSelectionUI();
+});
+
+// Toggle Select All
+toggleSelectBtn.addEventListener("click", () => {
+  const checkboxes = mailList.querySelectorAll(".checkbox");
+  const selectAll = mailList.querySelectorAll(".checkbox:checked").length !== checkboxes.length;
+
+  checkboxes.forEach(cb => {
+    cb.checked = selectAll;
+    cb.closest("li").classList.toggle("selected", cb.checked);
+  });
+
+  updateSelectionUI();
 });
 
 // Show overlay with count
@@ -24,11 +62,9 @@ deleteBtn.addEventListener("click", () => {
 // Confirm delete
 confirmDelete.addEventListener("click", () => {
   const checkedItems = mailList.querySelectorAll(".checkbox:checked");
-  checkedItems.forEach(item => {
-    item.closest("li").remove();
-  });
+  checkedItems.forEach(item => item.closest("li").remove());
   overlay.classList.remove("active");
-  deleteBtn.disabled = true;
+  updateSelectionUI();
 });
 
 // Cancel delete
@@ -36,19 +72,27 @@ cancelDelete.addEventListener("click", () => {
   overlay.classList.remove("active");
 });
 
-// Add new item with preview style
+// Add new item
 addBtn.addEventListener("click", () => {
-  const text = newItemInput.value.trim();
-  if (text === "") return;
+  const header = newHeaderInput.value.trim();
+  const subtext = newSubtextInput.value.trim();
+
+  if (header === "" || subtext === "") return;
 
   const li = document.createElement("li");
   li.innerHTML = `
     <div class="item-text">
-      <strong>${text}</strong>
-      <p>Newly added item...</p>
+      <strong>${header}</strong>
+      <p>${subtext}</p>
     </div>
     <input type="checkbox" class="checkbox">
   `;
   mailList.appendChild(li);
-  newItemInput.value = "";
+
+  newHeaderInput.value = "";
+  newSubtextInput.value = "";
+  updateSelectionUI();
 });
+
+// Initial update
+updateSelectionUI();
